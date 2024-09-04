@@ -18,7 +18,9 @@ jobs:
             python-version: 3.11
         
         - name: Install dependencies
-          run: pip install -U selenium
+          run: |
+            pip install -U selenium
+            pip install webdriver-manager
 
         - name: Run main
           run: python main.py
