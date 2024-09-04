@@ -10,8 +10,10 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromiumService
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.core.os_manager import ChromeType
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument('--headless')
 
-browser = webdriver.Chrome(service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
+browser = webdriver.Chrome(service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()), options=chrome_options)
 
 def get_source_code(asset_id):
     # browser = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
