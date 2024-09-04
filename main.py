@@ -71,20 +71,20 @@ def get_properties(asset_id):
     data = get_source_code(asset_id)
     traits = get_traits(data)
     price = get_price(data)
-    write_to_file(asset_id,traits,price)
+    if price != ' ':
+        write_to_file(asset_id,traits,price)
 
 threads = []
-for i in range(50,53):
-    get_properties(i)
-#     if i % 10 == 0:
-#         for thread in threads:
-#             thread.join()
-#         threads = []
-#     thread = threading.Thread(target=get_properties, args=(i,))
-#     threads.append(thread)
-#     thread.start()
-# for thread in threads:
-#     thread.join()
+for i in range(50,1000):
+    if i % 10 == 0:
+        for thread in threads:
+            thread.join()
+        threads = []
+    thread = threading.Thread(target=get_properties, args=(i,))
+    threads.append(thread)
+    thread.start()
+for thread in threads:
+    thread.join()
 
 
 
