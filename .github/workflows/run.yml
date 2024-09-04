@@ -24,3 +24,6 @@ jobs:
 
         - name: Run main
           run: python main.py
+        
+        - name: Write data.csv to GitHub summary
+          run: echo "$(data.csv)" >> $GITHUB_SUMMARY
