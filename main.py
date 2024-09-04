@@ -1,12 +1,15 @@
 import ast, threading
 import re,ast
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+
+driver = ChromeDriverManager().install()
 coloumb_data = {0:'ID',1:'Egg',2:'Accessories',3:'Backs',4:'Body',5:'Card',6:'Element',7:'Eyes',8:'Face Details',9:'Glasses',10:'Hats',11:'Mouth',12:'Moves',13:'Moves',14:'Moves',15:'Moves',16:'Tails',17:'Wings',18:'Price'}
 
 
 
 def get_source_code(asset_id):
-    browser = webdriver.Chrome()
+    browser = webdriver.Chrome(driver)
     browser.get(f"https://opensea.io/assets/0x4e76c23fe2a4e37b5e07b5625e17098baab86c18/{asset_id}")
     html = browser.page_source
     browser.quit()
