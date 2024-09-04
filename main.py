@@ -74,7 +74,7 @@ def get_properties(asset_id):
     write_to_file(asset_id,traits,price)
 
 threads = []
-for i in range(50,1000):
+for i in range(50,53):
     get_properties(i)
 #     if i % 10 == 0:
 #         for thread in threads:
