@@ -6,13 +6,18 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 coloumb_data = {0:'ID',1:'Egg',2:'Accessories',3:'Backs',4:'Body',5:'Card',6:'Element',7:'Eyes',8:'Face Details',9:'Glasses',10:'Hats',11:'Mouth',12:'Moves',13:'Moves',14:'Moves',15:'Moves',16:'Tails',17:'Wings',18:'Price'}
 
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromiumService
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.core.os_manager import ChromeType
 
+browser = webdriver.Chrome(service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
 
 def get_source_code(asset_id):
-    browser = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    # browser = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     browser.get(f"https://opensea.io/assets/0x4e76c23fe2a4e37b5e07b5625e17098baab86c18/{asset_id}")
     html = browser.page_source
-    browser.quit()
+    # browser.quit()
     return html.replace('\u0393','')
 
 def get_traits(data):
@@ -68,15 +73,16 @@ def get_properties(asset_id):
 
 threads = []
 for i in range(50,51):
-    if i % 10 == 0:
-        for thread in threads:
-            thread.join()
-        threads = []
-    thread = threading.Thread(target=get_properties, args=(i,))
-    threads.append(thread)
-    thread.start()
-for thread in threads:
-    thread.join()
+    get_properties(i)
+#     if i % 10 == 0:
+#         for thread in threads:
+#             thread.join()
+#         threads = []
+#     thread = threading.Thread(target=get_properties, args=(i,))
+#     threads.append(thread)
+#     thread.start()
+# for thread in threads:
+#     thread.join()
 
 
 
