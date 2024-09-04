@@ -1,21 +1,15 @@
 import ast, threading
 import re,ast
 from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-
-driver = ChromeDriverManager().install()
 coloumb_data = {0:'ID',1:'Egg',2:'Accessories',3:'Backs',4:'Body',5:'Card',6:'Element',7:'Eyes',8:'Face Details',9:'Glasses',10:'Hats',11:'Mouth',12:'Moves',13:'Moves',14:'Moves',15:'Moves',16:'Tails',17:'Wings',18:'Price'}
-chrome_options = webdriver.ChromeOptions()
-prefs = {"profile.managed_default_content_settings.images": 2}
-chrome_options.add_experimental_option("prefs", prefs)
 
 
 
 def get_source_code(asset_id):
-    browser = webdriver.Chrome(driver)
+    browser = webdriver.Chrome()
     browser.get(f"https://opensea.io/assets/0x4e76c23fe2a4e37b5e07b5625e17098baab86c18/{asset_id}")
     html = browser.page_source
-    browser.close()
+    browser.quit()
     return html.replace('\u0393','')
 
 def get_traits(data):
